@@ -24,10 +24,19 @@ const signUpObj = {
   task: "Sign up",
   actionTask: "/api/signup",
 };
+router.get("/getuser", async (req, res) => {
+  User.find({})
+  .then((user) => {
+    res.json(user)
+  })
+  
+
+});
 router.get("/signup", async (req, res) => {
   res.render("sign_up", signUpObj);
 });
 router.post("/signup", async function (req, res) {
+  console.log(req.body);
   if (!req.body.username || !req.body.password) {
     // res.json({ success: false, msg: 'Please pass username and password.' });
     signUpObj.notify = "Please pass username and password.";
@@ -66,7 +75,9 @@ const homeObj = {
   pageTitle: "Trang chu",
 };
 router.get("/signin", async (req, res) => {
+  
   res.render("sign_in", signInObj);
+  
 });
 router.post("/signin", async function (req, res) {
   let user = await User.findOne({ username: req.body.username });

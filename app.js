@@ -8,11 +8,11 @@ var config = require("./config/database");
 const session = require("express-session");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-
+const db = require('../express-lab7/config/mongoose');
 var apiRouter = require("./routes/api");
 
 var app = express();
-
+db.connet()
 app.use(
   session({
     resave: true,
